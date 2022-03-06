@@ -1,0 +1,23 @@
+version: "3.4"
+
+services:
+  app:
+    build: .
+    image: tempo
+    ports:
+      - 80:80
+    restart: unless-stopped
+
+  db:
+    image: couchdb:3
+    environment:
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
+    ports:
+      - 5984:5984
+    volumes:
+      - data:/opt/couchdb/data
+    restart: unless-stopped
+
+volumes:
+  data:
